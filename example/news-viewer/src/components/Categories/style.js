@@ -1,17 +1,19 @@
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const CategoriesBlock = styled.div`
   display: flex;
   padding: 1rem;
-  width : 768px;
+  width: 768px;
   margin: 0 auto;
-  @media screen and(max-width: 768px){
+  @media screen and(max-width: 768px) {
     width: 100%;
     overflow-x: auto;
   }
 `;
 
-export const Category = styled.div`
+//NavLink 사용
+export const Category = styled(NavLink)`    
   font-size: 1.125rem;
   cuser: pointer;
   white-space: pre;
@@ -19,19 +21,16 @@ export const Category = styled.div`
   color: inherit;
   padding-bottom: 0.25rem;
 
-  &:hover{
+  &:hover {
     color: #495057;
   }
-
-  ${props => 
-    props.active && css`
-      font-weight: 600;
-      border-bottom: 2px soild #22b8cf;
-      color: #22b8cf;
-      &:hover{
-        color: #22b8cf;
-      }
-    `}
+  &.active{
+    font-weight: 600;
+    border-bottom: 2px soild #22b8cf;
+    color: #22b8cf;
+     &:hover {
+      color: #3bc9db;
+  }
 
   &+& {
     margin-left: 1rem;
