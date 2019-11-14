@@ -1,15 +1,16 @@
 import React from "react";
 import ColorBox from "./components/ColorBox";
-import ColorContext from "./contexts/color";
+import ColorContext, { ColorProvider } from "./contexts/color";
+import SelectColors from "./components/SelectColors";
 
 const App = () => {
   return (
-    //provider 사용해서 context value 변경. createContext 함수 사용할때는 넣어준 기본값은 provider 사용하지 않을 때만 사용됨
-    <ColorContext.Provider value={{ color: "red" }}>
+    <ColorProvider>
       <div>
+        <SelectColors />
         <ColorBox />
       </div>
-    </ColorContext.Provider>
+    </ColorProvider>
   );
 };
 
