@@ -38,7 +38,7 @@ const initionalState = {
       done: true,
     },
     {
-      id: 2,
+      id: 2, 
       text: '리엑트 책 다 읽깅',
       done: false,
     },
