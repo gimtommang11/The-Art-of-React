@@ -31,14 +31,13 @@ export const remove = id => ({
 
 const initionalState = {
   input: '',
-  todos: [
-    {
+  todos: [{
       id: 1,
       text: '포트폴리오 다썻땅',
       done: true,
     },
     {
-      id: 2, 
+      id: 2,
       text: '리엑트 책 다 읽깅',
       done: false,
     },
@@ -60,7 +59,10 @@ function todos(state = initionalState, action) {
       return {
         ...state,
         todos: state.todos.map(todo =>
-          todo.id === action.id ? { ...todo, done: !todo.done } : todo,
+          todo.id === action.id ? {
+            ...todo,
+            done: !todo.done
+          } : todo,
         ),
       };
     case REMOVE:
