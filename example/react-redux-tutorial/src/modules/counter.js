@@ -1,6 +1,6 @@
 //엑션 타입 정의
 const INCREASE = 'counter/INCREASE'; // 모듈 이름/ 엑션 이름
-const DECREASE = 'counter/DECREASE';
+const DECREASE = 'counter/DECREASE'; //엑션 이름 중복을 피하기 위해서 이렇게 사용함
 
 //엑션 함수 생성
 export const increase = () => ({
@@ -19,9 +19,13 @@ const initialState = {
 function counter(state = initialState, action) {
   switch (action.type) {
     case INCREASE:
-      return { number: state.number + 1 };
+      return {
+        number: state.number + 1
+      };
     case DECREASE:
-      return { number: state.number - 1 };
+      return {
+        number: state.number - 1
+      };
     default:
       return state;
   }
