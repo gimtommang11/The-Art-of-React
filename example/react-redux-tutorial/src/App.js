@@ -7,6 +7,8 @@ import TodosContainer from './containers/TodosContainer.jsx';
 const App = () => {
   return (
     <>
+      
+      <hr />
       <CounterContainer />
       <hr />
       <TodosContainer />
