@@ -2,6 +2,9 @@ import {
   createAction,
   handleActions
 } from 'redux-actions';
+import {
+  dispatch
+} from 'C:/Users/user/AppData/Local/Microsoft/TypeScript/3.6/node_modules/rxjs/internal/observable/pairs';
 
 const INCREASE = 'counter/INCREASE';
 const DECREASE = 'counter/DECREASE';
@@ -35,9 +38,24 @@ const DECREASE = 'counter/DECREASE';
 //   }
 // }
 
+
+
 //엑션생성자 creteAction으로 생성
 export const increase = createAction(INCREASE);
 export const decrease = createAction(DECREASE);
+
+//1초 뒤에 increase 혹은 decrease 함수를 디스패치함
+export const increaseAsync = () => dispatch => {
+  setTimeout(() => {
+    dispatch(increase());
+  }, 1000)
+};
+
+export const decreaseAnsync = () => dispatch => {
+  setTimeout(() => {
+    dispatch(decrease())
+  }, 1000)
+}
 
 const initialState = 0;
 
