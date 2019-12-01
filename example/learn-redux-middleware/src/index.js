@@ -10,7 +10,7 @@ import {
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import rootReducer from './models/index';
+import rootReducer from './modules/index';
 //import loggerMiddleware from './lib/loggerMiddleware';
 import {
   createLogger

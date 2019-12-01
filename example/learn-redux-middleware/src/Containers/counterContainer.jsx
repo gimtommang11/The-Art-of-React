@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { increaseAsync, decreaseAnsync } from '../models/counter';
+import { increaseAsync, decreaseAnsync } from '../modules/counter';
 import Counter from '../Components/counter';
 
 //비동기 가능하게 수정
