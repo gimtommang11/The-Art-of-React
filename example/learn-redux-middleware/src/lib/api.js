@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export const getPost = id => { //다른 파일에서 이를 import해서 사용함
   axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)
+  
 }
 
 export const getUsers = id => {

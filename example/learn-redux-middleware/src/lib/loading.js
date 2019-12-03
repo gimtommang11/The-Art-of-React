@@ -1,4 +1,7 @@
-import { createAction, handleActions } from 'react-redux';
+import {
+  createAction,
+  handleActions
+} from 'redux-actions';
 
 const START_LOADING = 'loading/START_LOADING';
 const FINISH_LOADIG = 'loading/FINISH_LOADING';
@@ -19,8 +22,7 @@ export const finishLoading = createAction(
 const initialState = {};
 
 //리듀서
-const loading = handleActions(
-  {
+const loading = handleActions({
     [START_LOADING]: (state, action) => ({
       //요청 시작시 dispatch
       //엑션 타입에 접두사가 들어있기 때문에 괄호를 붙여줌
