@@ -15,7 +15,11 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "airbnb",
+      "prettier"
+    ],
+    "parser": "barbel-eslint"
   },
   "browserslist": {
     "production": [
