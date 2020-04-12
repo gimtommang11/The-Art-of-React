@@ -9,6 +9,21 @@ const getPublicUrlOrPath = require('react-dev-utils/getPublicUrlOrPath');
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
+const envPublicUrl = process.env.PUBLIC_URL
+
+function ensureSlash(inputPath, needsSlash) {
+  const hasSlash = inputPath.endsWith('/');
+  if (hasSlash && !needsSlash) {
+    return inputPath.substr(0, inputPath.length - 1);
+  } else if (!hasSlash && needsSlash) {
+    return `${inputPath}/`;
+  } else {
+    return inputPath;
+  }
+}
+
+const getPublicUrl = appPackageJson =>
+  envPublicUrl || require(appPackageJson).homepage;
 // We use `PUBLIC_URL` environment variable or "homepage" field to infer
 // "public path" at which the app is served.
 // webpack needs to know it to put the right <script> hrefs into HTML even in
@@ -20,6 +35,14 @@ const publicUrlOrPath = getPublicUrlOrPath(
   require(resolveApp('package.json')).homepage,
   process.env.PUBLIC_URL
 );
+
+function getServedPath(appPackageJson) {
+  const publicUrl = getPublicUrl(appPackageJson);
+  const servedUrl =
+    envPublicUrl || (publicUrl ? url.parse(publicUrl).pathname : '/');
+  return ensureSlash(servedUrl, true);
+}
+
 
 const moduleFileExtensions = [
   'web.mjs',
@@ -59,14 +82,14 @@ module.exports = {
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   appTsConfig: resolveApp('tsconfig.json'),
-  appJsConfig: resolveApp('jsconfig.json'),
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveModule(resolveApp, 'src/setupTests'),
   proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
-  publicUrlOrPath,
-  ssrIndexJs: resolveApp('src/index.server.js'), //서버 사이드 렌더링 엔트리
-  ssrBuild: resolveApp('dist') // 웹팩 처리 후 저장 결로
+  publicUrl: getPublicUrl(resolveApp('package.json')),
+  servedPath: getServedPath(resolveApp('package.json')),
+  ssrIndexJs: resolveApp('src/index.server.js'), // 서버 사이드 렌더링 엔트리
+  ssrBuild: resolveApp('dist') // 웹팩 처리 후 저장 경로
 };
 
 
