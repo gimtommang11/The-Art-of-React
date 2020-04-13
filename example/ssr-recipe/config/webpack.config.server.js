@@ -11,7 +11,7 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
-const env = getClientEnvironment(publicUrlOrPath);
+const env = getClientEnvironment(paths.publicUrlOrPath);
 module.exports = {
   mode: "production", //프로덕편 모드로 설정하여 최적화 옵션들 활성화
   entry: paths.ssrIndexJs, //엔트리 경로
@@ -59,7 +59,7 @@ module.exports = {
           //  exportOnlyLocals: true 옵션을 설정해야 실제 CSS 파일을 생성하지 않습니다.
           loader: require.resolve("css-loader"),
           options: {
-            exportOnlyLocals: true,
+            onlyLocals: true,
           },
         },
         // CSS Module을 위한 처리
@@ -68,7 +68,7 @@ module.exports = {
           loader: require.resolve("css-loader"),
           options: {
             modules: true,
-            exportOnlyLocals: true,
+            onlyLocals: true,
             getLocalIdent: getCSSModuleLocalIdent,
           },
         },
@@ -79,7 +79,7 @@ module.exports = {
           use: [{
               loader: require.resolve("css-loader"),
               options: {
-                exportOnlyLocals: true,
+                onlyLocals: true,
               },
             },
             require.resolve("sass-loader"),
@@ -93,7 +93,7 @@ module.exports = {
               loader: require.resolve("css-loader"),
               options: {
                 modules: true,
-                exportOnlyLocals: true,
+                onlyLocals: true,
                 getLocalIdent: getCSSModuleLocalIdent,
               },
             },
