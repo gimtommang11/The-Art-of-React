@@ -6,7 +6,8 @@ import ReactDOMServer from "react-dom/server";
 import express from "express";
 //이 컴포넌트는 주로 SSR용도로 사용됨.
 import { StaticRouter } from "react-router-dom";
-import App from "./App.jsx";
+import App from "./App ";
+import path from "path";
 
 const app = express();
 
@@ -24,7 +25,12 @@ const serverRender = (req, res, next) => {
   const root = ReactDOMServer.renderToString(jsx); //랜더링 진행
   res.send(root); //클라이언트에게 결과물 응답
 };
+//static 미들웨어 이용해 서버를 통해 build에 있는 js.Css 정적 일들에 접근할 수 있도록 함.
+const serve = express.static(path.resolve("./build"), {
+  index: false, //"/"경로에서 index.html을 보여쥐 않도록 설정
+});
 
+app.use(serve); // ServerRender전에 위치해야 함
 app.use(serverRender);
 
 //5000포트로 서버 가동
