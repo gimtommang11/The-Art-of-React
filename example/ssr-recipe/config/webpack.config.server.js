@@ -11,8 +11,7 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
-const publicUrl = paths.servedPath.slice(0, -1);
-const env = getClientEnvironment(publicUrl);
+const env = getClientEnvironment(publicUrlOrPath);
 module.exports = {
   mode: "production", //프로덕편 모드로 설정하여 최적화 옵션들 활성화
   entry: paths.ssrIndexJs, //엔트리 경로
@@ -21,8 +20,7 @@ module.exports = {
     path: paths.ssrBuild, //빌드 경로
     filename: "server.js", //파일 이름
     chunkFilename: "js/[name].chunk.js", //청크 파일 이름
-    publicPath: paths.servedPath, //정적 파일이 제공될 경로
-    publicPath: paths.servedPath, // 정적 파일이 제공될 경로
+    publicPath: paths.publicUrlOrPath
   },
   module: {
     rules: [{
@@ -131,6 +129,6 @@ module.exports = {
   },
   externals: [nodeExternals()],
   plugins: [
-    new webpack.DefinePlugin(env.stringified), // 환경변수 주입해준다
+    new webpack.DefinePlugin(env.stringified) // 환경변수 주입해준다
   ],
 };
